@@ -52,6 +52,14 @@ func (s Status) String() string {
 // having a response body.
 func (s Status) PermitsResponseBody() bool { panic("TODO") }
 
+// IsInformation reports whether s is in the Client Error (1xx) status code
+// class, as defined by RFC 7231 section 6.2.
+//
+// See: https://tools.ietf.org/html/rfc7231#section-6.2
+func (s Status) IsInformation() bool {
+	return s.code >= 100 && s.code <= 199
+}
+
 // IsSuccess reports whether s is in the Successful (2xx) status code class,
 // as defined by RFC 7231 section 6.3.
 func (s Status) IsSuccess() bool {
